@@ -27,7 +27,6 @@ test('Static Dropdown',async({page})=>{
     await expect(alldropdown).toContain("Option2");
 
     //5. presence  of valuer in dropdown - Approach 2
-    const alloption=await page.$$(dropdownOptions);
-    await expect(alloption.includes("Option2")).toBeTruthy();
+    await expect(dropdownOptions.includes("Option2")).toBeTruthy();
 
 });
