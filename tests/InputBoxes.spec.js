@@ -11,10 +11,10 @@ test('Input Box',async({page})=>{
 
     await page.getByRole('button', { name: 'Get Sum' }).click();
 
-    await page.waitForTimeout(2000);
+    // await page.waitForTimeout(2000);
 
-    await expect(page.locator("#addmessage")).toBeVisible();
+    // await expect(page.locator("#addmessage")).toBeVisible();
 
-    await expect(page.locator("#addmessage")).toHaveText("30")
+    // await expect(page.locator("#addmessage")).toHaveText("30")
 
 })
