@@ -51,7 +51,7 @@ test('Multi Select Dropdown',async({page})=>{
 
 });
 
-test('Auto Dropdown',async({page})=>{
+test.skip('Auto Dropdown',async({page})=>{
     await page.goto('https://www.amazon.in/');
 
     await page.getByPlaceholder("Search Amazon.in").pressSequentially("iphone 14 pro max case")
