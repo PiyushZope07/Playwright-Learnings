@@ -1,14 +1,17 @@
 import {test,expect} from '@playwright/test';
 
-test('File Upload',async({page})=>{
+test('Single File Upload',async({page})=>{
     await page.goto('https://practice.expandtesting.com/upload');
 
     const fileInput=await page.locator('#fileInput');
 
-    const filePath=process.cwd()+"\\TestFiles\\playwright-report.zip";
-
-    await fileInput.setInputFiles(filePath);
+    await fileInput.setInputFiles("TestFiles/playwright-report.zip");
     await page.click('#fileSubmit');
 
     await expect(page.locator('.breadcrumb')).toContainText("File Uploaded!");
 });
+
+// test.oonly('Multiple File Upload',async({page})=>{
+//     await page.goto('https://practice.expandtesting.com/upload');
+
+// });
