@@ -6,6 +6,8 @@ test('Static Dropdown',async({page})=>{
     const dropdown="#dropdown-class-example";
 
     await page.locator(dropdown).selectOption("Option1");
+    //await page.locator(dropdown).selectOption("Option1");
+    //await page.locator(dropdown).selectOption({index:2});
     await expect(page.locator(dropdown)).toHaveValue("option1")
 
     //Assert Dropdown options`
@@ -29,4 +31,42 @@ test('Static Dropdown',async({page})=>{
     //5. presence  of valuer in dropdown - Approach 2
     await expect(dropdownOptions.includes("Option2")).toBeTruthy();
 
+});
+
+test('Multi Select Dropdown',async({page})=>{
+    await page.goto('https://demoqa.com/select-menu');
+
+    await page.locator('#cars').selectOption(['Saab','Opel']);
+
+    //Count
+    await expect(page.locator('#cars option')).toHaveCount(4);
+
+    //presence of value in dropdown
+    const dropdownOptions=await page.locator('#cars option').allTextContents();
+    await expect(dropdownOptions).toContain("Opel");
+
+    //equal
+    await expect(dropdownOptions).toEqual(['Volvo','Saab','Opel','Audi']);
+    await expect(dropdownOptions.includes("Opel")).toBeTruthy();
+
+});
+
+test('Auto Dropdown',async({page})=>{
+    await page.goto('https://www.amazon.in/');
+
+    await page.getByPlaceholder("Search Amazon.in").pressSequentially("iphone 14 pro max case")
+
+    const dropdownList=await page.$$(".left-pane-results-container")
+
+
+    for(const dr of dropdownList){
+        const alloptionText=await dr.textContent();
+        if(alloptionText.includes("iphone 14 pro max case")){
+            await dr.click();
+            break;
+        }
+    }
+
+    const enteredText =await page.locator("#twotabsearchtextbox").inputValue();
+    await expect(enteredText).toContain("iphone 14 pro max case");
 });
